@@ -4,7 +4,7 @@ Implementations of Dijkstra's shortest path algorithm in different languages, ba
 
 ## Code Example
 
-[C++](cpp/main.cpp)
+[C++](cpp/main.cpp) <br />
 [Java](java/src/name/bvv/dijkstra/Main.java)
 
 ## License
