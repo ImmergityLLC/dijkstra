@@ -1,2 +1,7 @@
-/.idea/
-/build/
+/cpp/.idea/
+/cpp/build/
+
+/java/.gradle/
+/java/gradle/
+/java/build/
+/java/.idea/
