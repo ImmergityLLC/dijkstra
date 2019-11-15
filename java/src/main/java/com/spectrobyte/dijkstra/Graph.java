@@ -28,7 +28,7 @@ public class Graph
   Build graph with start position
   @startVertexID - start position
 */
-  public void build(String startVertexID) throws Exception
+  public void Build(String startVertexID) throws Exception
   {
     finished = 0;
     Vertex vertex = vertices.get(startVertexID);
@@ -40,7 +40,16 @@ public class Graph
         start = false;
         continue;
       }
+
       Vertex nextVertex = vertices.get(next);
+      if(nextVertex.IsVisited()) {
+        nextVertex = getNextUnvisitedVertex();
+        if(nextVertex == null) {
+          start = false;
+          continue;
+        }
+      }
+
       exploreVertex(nextVertex);
     }
   }
@@ -56,12 +65,12 @@ public class Graph
   /*
   Return distance from start position to @destination
 */
-  public float getDistanceTo(String destination)
+  public float GetDistanceTo(String destination)
   {
     return vertices.get(destination).GetLabel();
   }
 
-  public void addVertex(String id)
+  public void AddVertex(String id)
   {
     vertices.put(id, new Vertex(id));
   }
@@ -69,7 +78,7 @@ public class Graph
   /*
     Remove vertex and edges which have been joined to it
 */
-  public void removeVertex(String id)
+  public void RemoveVertex(String id)
   {
     Vertex vertex = vertices.get(id);
     for(Edge edge : vertex.GetEdges()) {
@@ -82,13 +91,24 @@ public class Graph
     vertices.remove(id);
   }
 
-  public void addEdge(String from, String to, float label)
+  public void AddEdge(String from, String to, float label)
   {
     Vertex _from = vertices.get(from);
     Vertex _to = vertices.get(to);
     Edge edge = new Edge(_from, _to, label);
     _from.AddEdge(edge);
     _to.AddEdge(edge);
+  }
+
+  private Vertex getNextUnvisitedVertex()
+  {
+    for(Vertex vertex : vertices.values()) {
+      if(!vertex.IsVisited()) {
+        return vertex;
+      }
+    }
+
+    return null;
   }
 
   private void exploreVertex(Vertex vertex) throws Exception

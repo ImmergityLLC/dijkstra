@@ -23,23 +23,28 @@ class Edge
 public:
   Edge(Vertex* const from, Vertex* const to, float label) : _from(from), _to(to), _label(label) {};
 
-  Vertex* GetFromVertex() const {
+  Vertex* GetFromVertex() const
+  {
     return _from;
   };
 
-  Vertex* GetToVertex() const {
+  Vertex* GetToVertex() const
+  {
     return _to;
   };
 
-  void SetFromVertex(Vertex* const vertex) {
+  void SetFromVertex(Vertex* const vertex)
+  {
     _from = vertex;
   }
 
-  void SetToVertex(Vertex* const vertex) {
+  void SetToVertex(Vertex* const vertex)
+  {
     _to = vertex;
   }
 
-  Vertex* GetPartner(Vertex* vertex) const {
+  Vertex* GetPartner(Vertex* vertex) const
+  {
     if(_from == vertex) {
       return _to;
     } else {
@@ -47,11 +52,13 @@ public:
     }
   }
 
-  void SetLabel(float label) {
+  void SetLabel(float label)
+  {
     _label = label;
   };
 
-  float GetLabel() const {
+  float GetLabel() const
+  {
     return _label;
   };
 

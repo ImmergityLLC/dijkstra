@@ -15,7 +15,8 @@
 using namespace std;
 using namespace dijkstra;
 
-int main() {
+int main()
+{
   auto graph = new Graph();
   graph->AddVertex("1");
   graph->AddVertex("2");

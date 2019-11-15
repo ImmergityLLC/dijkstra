@@ -23,29 +23,35 @@ class Vertex
 public:
   Vertex(std::string id) : _id(id), _label(-1.0f), _visited(false) {};
 
-  std::string GetId() const {
+  std::string GetId() const
+  {
     return _id;
   };
 
-  void SetLabel(float label) {
+  void SetLabel(float label)
+  {
     _label = label;
   };
 
-  float GetLabel() const {
+  float GetLabel() const
+  {
     return _label;
   };
 
-  bool IsVisited() const {
+  bool IsVisited() const
+  {
     return _visited;
   };
 
-  const std::vector<Edge*>& GetEdges() const {
+  const std::vector<Edge*>& GetEdges() const
+  {
     return _edges;
   };
 
   void Done() { _visited = true; };
 
-  Edge* GetEdgeWith(const std::string& VertexID) {
+  Edge* GetEdgeWith(const std::string& VertexID)
+  {
     for(auto edge : _edges) {
       if(edge->GetPartner(this)->GetId() == VertexID) {
         return edge;
@@ -54,15 +60,18 @@ public:
     return nullptr;
   };
 
-  void AddEdge(Edge* edge) {
+  void AddEdge(Edge* edge)
+  {
     _edges.push_back(edge);
   };
 
-  void RemoveEdge(const Edge* const edge) {
+  void RemoveEdge(const Edge* const edge)
+  {
     _edges.erase(std::remove(_edges.begin(), _edges.end(), edge), _edges.end());
   };
 
-  void Reset() {
+  void Reset()
+  {
     _label = -1.0f;
     _visited = false;
   };

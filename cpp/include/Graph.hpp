@@ -27,14 +27,16 @@ class Graph
 public:
   Graph() : _next(""), _finished(0) {};
 
-  ~Graph() {
+  ~Graph()
+  {
     Clear();
   };
 
   /*
       Remove all vertices and edges.
   */
-  void Clear() {
+  void Clear()
+  {
     for(auto& edge : _edges) {
       delete edge;
       edge = nullptr;
@@ -52,7 +54,8 @@ public:
       Build graph with start position
       @startVertexID - start position
   */
-  void Build(const std::string& startVertexID) {
+  void Build(const std::string& startVertexID)
+  {
     assert(!_vertices.empty());
     _finished = 0;
     auto startVertex = _vertices.at(startVertexID);
@@ -64,15 +67,25 @@ public:
         start = false;
         continue;
       }
+
       auto vertex = _vertices.at(_next);
-      ExploreVertex(vertex);
+      if(vertex->IsVisited()) {
+        vertex = getNextUnvisitedVertex();
+        if(vertex == nullptr) {
+          start = false;
+          continue;
+        }
+      }
+
+      exploreVertex(vertex);
     }
   };
 
   /*
       Reset all labels from vertices. Use this method if you want to change start position and save current graph
   */
-  void Reset() {
+  void Reset()
+  {
     for(auto& entry : _vertices) {
       auto vertex = entry.second;
       vertex->Reset();
@@ -82,18 +95,21 @@ public:
   /*
       Return distance from start position to @destination
   */
-  float GetDistanceTo(const std::string& destination) {
+  float GetDistanceTo(const std::string& destination)
+  {
     return _vertices.at(destination)->GetLabel();
   };
 
-  void AddVertex(const std::string& id) {
+  void AddVertex(const std::string& id)
+  {
     _vertices.insert(std::pair<std::string, Vertex*>(id, new Vertex(id)));
   };
 
   /*
     Remove vertex and edges which have been joined to it
   */
-  void RemoveVertex(const std::string& id) {
+  void RemoveVertex(const std::string& id)
+  {
     auto it = _vertices.find(id);
     if(it != _vertices.end()) {
       auto vertex = it->second;
@@ -107,7 +123,8 @@ public:
     }
   };
 
-  void AddEdge(const std::string& from, const std::string& to, float label) {
+  void AddEdge(const std::string& from, const std::string& to, float label)
+  {
     auto _from = _vertices.at(from);
     auto _to = _vertices.at(to);
     auto edge = new Edge(_from, _to, label);
@@ -116,7 +133,8 @@ public:
     _to->AddEdge(edge);
   };
 
-  void RemoveEdge(const std::string& from, const std::string& to) {
+  void RemoveEdge(const std::string& from, const std::string& to)
+  {
     auto _from = _vertices.at(from);
     auto _to = _vertices.at(to);
     auto edge = _from->GetEdgeWith(to);
@@ -133,7 +151,19 @@ private:
   std::map<std::string, Vertex*> _vertices;
   std::vector<Edge*> _edges;
 
-  void ExploreVertex(Vertex* vertex) {
+  Vertex* getNextUnvisitedVertex()
+  {
+    for(auto& entry : _vertices) {
+      if(!entry.second->IsVisited()) {
+        return entry.second;
+      }
+    }
+
+    return nullptr;
+  }
+
+  void exploreVertex(Vertex* vertex)
+  {
     std::vector<Edge*> edges = vertex->GetEdges();
 
     float minDistance = 0.0f;
