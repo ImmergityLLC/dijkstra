@@ -176,7 +176,7 @@ private:
 
       auto distanceToPartner = vertex->GetLabel() + edge->GetLabel();
       auto distanceFromPartner = partner->GetLabel() + edge->GetLabel();
-      if(partner->GetLabel() == -1.0f) {
+      if(partner->GetLabel() >= 99990.0f) {
         partner->SetLabel(distanceToPartner);
       } else {
         if(distanceToPartner < partner->GetLabel()) {

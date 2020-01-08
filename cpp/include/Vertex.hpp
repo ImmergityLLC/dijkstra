@@ -21,7 +21,7 @@ namespace dijkstra {
 class Vertex
 {
 public:
-  Vertex(std::string id) : _id(id), _label(-1.0f), _visited(false) {};
+  Vertex(std::string id) : _id(id), _label(99999.0f), _visited(false) {};
 
   std::string GetId() const
   {
@@ -72,7 +72,7 @@ public:
 
   void Reset()
   {
-    _label = -1.0f;
+    _label = 99999.0f;
     _visited = false;
   };
 private:
