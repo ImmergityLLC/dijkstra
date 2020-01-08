@@ -1,6 +1,6 @@
 // ---------------------------------------------------------------------------
 // Implementation of Dijkstra's shortest path algorithm
-//
+// Test commit
 // Edge.hpp
 // This class is used to link two vertices
 //
