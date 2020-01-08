@@ -18,69 +18,58 @@
 #include "Edge.hpp"
 
 namespace dijkstra {
-class Vertex
-{
-public:
-  Vertex(std::string id) : _id(id), _label(99999.0f), _visited(false) {};
+	class Vertex{
+		public:
+		Vertex(std::string id) : _id(id), _label(99999.0f), _visited(false) {};
 
-  std::string GetId() const
-  {
-    return _id;
-  };
+		std::string GetId() const  {
+			return _id;
+		};
 
-  void SetLabel(float label)
-  {
-    _label = label;
-  };
+		void SetLabel(float label)  {
+			_label = label;
+		};
 
-  float GetLabel() const
-  {
-    return _label;
-  };
+		float GetLabel() const  {
+			return _label;
+		};
 
-  bool IsVisited() const
-  {
-    return _visited;
-  };
+		bool IsVisited() const  {
+			return _visited;
+		};
 
-  const std::vector<Edge*>& GetEdges() const
-  {
-    return _edges;
-  };
+		const std::vector<Edge*>& GetEdges() const  {
+			return _edges;
+		};
 
-  void Done() { _visited = true; };
+		void Done() { _visited = true; };
 
-  Edge* GetEdgeWith(const std::string& VertexID)
-  {
-    for(auto edge : _edges) {
-      if(edge->GetPartner(this)->GetId() == VertexID) {
-        return edge;
-      }
-    }
-    return nullptr;
-  };
+		Edge* GetEdgeWith(const std::string& VertexID)  {
+			for(auto edge : _edges) {
+				if(edge->GetPartner(this)->GetId() == VertexID) {
+					return edge;
+				}
+			}
+			return nullptr;
+		};
 
-  void AddEdge(Edge* edge)
-  {
-    _edges.push_back(edge);
-  };
+		void AddEdge(Edge* edge)  {
+			_edges.push_back(edge);
+		};
 
-  void RemoveEdge(const Edge* const edge)
-  {
-    _edges.erase(std::remove(_edges.begin(), _edges.end(), edge), _edges.end());
-  };
+		void RemoveEdge(const Edge* const edge)  {
+			_edges.erase(std::remove(_edges.begin(), _edges.end(), edge), _edges.end());
+		};
 
-  void Reset()
-  {
-    _label = 99999.0f;
-    _visited = false;
-  };
-private:
-  std::string _id;
-  float _label;
-  bool _visited;
-  std::vector<Edge*> _edges;
-};
+		void Reset()  {
+			_label = 99999.0f;
+			_visited = false;
+		};
+		private:
+		std::string _id;
+		float _label;
+		bool _visited;
+		std::vector<Edge*> _edges;
+	};
 }
-
 #endif
