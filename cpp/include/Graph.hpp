@@ -19,6 +19,8 @@
 #include "Vertex.hpp"
 #include "Edge.hpp"
 
+bool distfind;
+
 namespace dijkstra {
 using namespace std;
 
@@ -46,6 +48,7 @@ using namespace std;
 			}
 			_vertices.clear();
 		};
+
 
 /* Build graph with start position @startVertexID - start position */
 		void Build(const std::string& startVertexID)  {
@@ -85,9 +88,9 @@ using namespace std;
 		return _vertices.at(destination)->GetLabel();
 	};
 
-		void AddVertex(const std::string& id)  {
-			_vertices.insert(std::pair<std::string, Vertex*>(id, new Vertex(id)));
-		};
+	void AddVertex(const std::string& id)  {
+		_vertices.insert(std::pair<std::string, Vertex*>(id, new Vertex(id)));
+	};
 
 /* Remove vertex and edges which have been joined to it */
 		void RemoveVertex(const std::string& id)  {
@@ -104,14 +107,17 @@ using namespace std;
 			}
 		};
 
-		void AddEdge(const std::string& from, const std::string& to, float label)  {
-			auto _from = _vertices.at(from);
-			auto _to = _vertices.at(to);
-			auto edge = new Edge(_from, _to, label);
-			_edges.push_back(edge);
-			_from->AddEdge(edge);
-			_to->AddEdge(edge);
-		};
+	void AddEdge(const std::string& from, const std::string& to, float label)  {
+			
+	
+		auto _from = _vertices.at(from);
+		auto _to = _vertices.at(to);
+		auto edge = new Edge(_from, _to, label);
+
+		_edges.push_back(edge);
+		_from->AddEdge(edge);
+		_to->AddEdge(edge);
+	};
 
 		void RemoveEdge(const std::string& from, const std::string& to)  {
 			auto _from = _vertices.at(from);
@@ -153,6 +159,7 @@ using namespace std;
 					auto distanceFromPartner = partner->GetLabel() + edge->GetLabel();
 						if(partner->GetLabel() >= 99990.0f) {
 							partner->SetLabel(distanceToPartner);
+
 						} else {
 							if(distanceToPartner < partner->GetLabel()) {
 								partner->SetLabel(distanceToPartner);
@@ -176,6 +183,7 @@ using namespace std;
 			}
 			vertex->Done();
 			_finished++;
+			distfind = true;
 		}
 	};
 }
