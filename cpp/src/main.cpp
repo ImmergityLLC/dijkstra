@@ -17,6 +17,7 @@ using namespace dijkstra;
 
 int main()
 {
+
   auto graph = new Graph();
   graph->AddVertex("1");
   graph->AddVertex("2");
@@ -53,6 +54,9 @@ int main()
 
   auto distance = graph->GetDistanceTo("5");
   cout << "distance to vertex: " + to_string(distance) + "\n";
+	if (distfind)	{ cout << "boobooYES\n" ; 
+			} else 	{ cout << "boobooNO\n";
+				}
 
   delete graph;
 
