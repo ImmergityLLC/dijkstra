@@ -57,6 +57,17 @@ namespace dijkstra {
 			_edges.push_back(edge);
 		};
 
+/*		void CheckEdge(int five){
+			int arrsize = _vertices.size();
+			int fzcount = 0;
+			auto ifrom = five;
+			for (int i = 0; i<=arrsize; i++) {				
+				if (Edge[i] == ifrom){
+					fzcount++;
+				}
+			}	
+		} */
+
 		void RemoveEdge(const Edge* const edge)  {
 			_edges.erase(std::remove(_edges.begin(), _edges.end(), edge), _edges.end());
 		};
